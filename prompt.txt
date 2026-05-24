@@ -1,0 +1,2 @@
+review section banao . jekne 2 ta part thakbe . 1 st part a akta from thakbe form a name , upload image option thakbe. 
+2nd part a reviews golo cards hishebe dekhbe and scrollable thakbe tmi chaile carosel babohar korte paro . card a name , image dekha jabe , image a click korle image ta full screen e dekhabe . cards golo same size ar hobe . all device ar jnno responsive hobe , 
