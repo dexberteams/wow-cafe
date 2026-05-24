@@ -1,36 +1,390 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# WOW Cafe ☕
 
-## Getting Started
+Modern Premium Café Website built with **Next.js**, **React**, and **Tailwind CSS**.
 
-First, run the development server:
+---
+
+# 🌟 Project Overview
+
+WOW Cafe is a modern café website designed to deliver a smooth and premium coffee-shop experience online.
+The platform showcases café menus, branch locations, best-selling drinks, customer reviews, company story, and direct WhatsApp communication.
+
+The project focuses on:
+
+- Minimal & elegant UI
+- Premium café branding
+- Mobile-first responsive design
+- Smooth user experience
+- Modern animations and interactions
+
+---
+
+# 🎨 Brand Identity
+
+## Logo Concept
+
+Arabic Letter:
+
+و
+
+# ✨ Theme Style
+
+- Minimal
+- Elegant
+- Modern café aesthetic
+- Cozy coffee-shop atmosphere
+
+---
+
+# 🏗️ Full Page Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Home
+├── Hero Section
+├── Menu Highlight
+├── Locations
+├── Recommended Items
+├── Reviews
+├── About
+├── Contact
+└── Footer
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# 🚀 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 1. Hero Section
 
-## Learn More
+### Features
 
-To learn more about Next.js, take a look at the following resources:
+- Full-width background image/video
+- Cozy café atmosphere
+- Warm lighting
+- Overlay gradient for readability
+- Smooth entrance animations
+- Floating coffee elements
+- Scroll indicator
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Main Heading
 
-## Deploy on Vercel
+```txt
+Choose quality over quantity!
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Sub Heading
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```txt
+Experience handcrafted coffee and unforgettable moments at WOW Cafe.
+```
+
+### CTA Buttons
+
+- Explore Menu
+- Visit Us
+
+### Hero Stats
+
+- ⭐ 4.8/5 Rating
+- 1200+ Reviews
+
+---
+
+# 🍰 2. Menu Section
+
+## Design Style
+
+- Tab System
+- Card-based UI
+- Hover animations
+- Smooth transitions
+
+## Menu Categories
+
+- Sweet & Bakery
+- Hot Coffee
+- Cold Coffee
+
+## Each Menu Item Includes
+
+- Product Image
+- Item Name
+- Price
+- Short Description
+- Rating
+- Favorite Button (Heart Icon)
+
+## Optional Features
+
+- Filter system
+- Search functionality
+- Smooth tab transitions
+
+---
+
+# 📍 3. Branch Location Section
+
+## Features
+
+- Google Map Embed
+- Branch Information Cards
+
+## Each Branch Includes
+
+- Branch Name
+- Address
+- Open Hours
+- Contact Number
+
+## Suggested Layout
+
+- Left Side → Map
+- Right Side → Branch Details
+
+---
+
+# ☕ 4. Recommended / Best Seller Section
+
+## Section Title
+
+```txt
+Top Picks of the Week
+```
+
+## Features
+
+- Best-selling products
+- Trending items
+- Customer favorite drinks
+
+## Item Card Includes
+
+- Image
+- Name
+- Price
+- Badge
+
+## Badge Types
+
+- Trending
+- Best Seller
+- Most Loved
+
+---
+
+# ⭐ 5. Google Reviews Integration
+
+## Requirements
+
+- Customer review screenshots/images only
+- Masonry or slider layout
+- Responsive review cards
+
+## Suggested Features
+
+- Auto sliding carousel
+- Rating stars
+- Customer names
+
+---
+
+# 🏢 6. About Company Section
+
+## Purpose
+
+Tell the story of WOW Cafe.
+
+## Includes
+
+- Brand Story
+- How WOW Cafe started
+- Passion for coffee
+- Customer experience focus
+
+## Mission
+
+```txt
+To serve high-quality handcrafted coffee with exceptional customer experience.
+```
+
+## Vision
+
+```txt
+To become a memorable coffee destination for every coffee lover.
+```
+
+## Design Suggestions
+
+- Split layout
+- Café interior images
+- Soft typography
+- Minimal aesthetic
+
+---
+
+# 📩 7. Contact Section
+
+## Contact Form Fields
+
+- Name
+- Email
+- Message
+
+## Features
+
+- Form validation
+- Responsive layout
+- Success/Error toast notifications
+
+---
+
+# 🦶 8. Footer Section
+
+## Footer Includes
+
+- Dexber Logo
+
+## CTA
+
+```txt
+Get Started With Us
+```
+
+### Button Action
+
+Open WhatsApp Chat
+
+## WhatsApp Information
+
+### Number
+
+```txt
++9660552075463
+```
+
+### WhatsApp Link
+
+```txt
+https://wa.me/qr/FFKEFHGBUVRZI1
+```
+
+## Footer Navigation
+
+- Home
+- Menu
+- About
+- Contact
+
+## Copyright
+
+```txt
+Powered by Dexber
+```
+
+---
+
+# 📱 Responsive Design Requirements
+
+## Mobile-First Design
+
+The website must be fully responsive for:
+
+- Mobile
+- Tablet
+- Laptop
+- Large Desktop
+
+## Mobile Optimization
+
+- Responsive navbar
+- Hamburger menu
+- Optimized images
+- Proper spacing
+- Touch-friendly buttons
+- Smooth scrolling
+
+---
+
+# 🎭 UI/UX Requirements
+
+## Design Style
+
+- Minimal
+- Elegant
+- Premium café vibe
+- Soft shadows
+- Rounded cards
+- Smooth animations
+
+## Animation Suggestions
+
+- Framer Motion animations
+- Fade-in effects
+- Hover interactions
+- Scroll animations
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+- Next.js
+- React.js
+- Tailwind CSS
+
+## Animation
+
+- Framer Motion
+
+## Icons
+
+- Lucide React
+
+## Hosting
+
+- Vercel
+
+---
+
+# 📂 Suggested Folder Structure
+
+```bash
+src
+├── app
+├── components
+│   ├── Hero
+│   ├── Menu
+│   ├── Reviews
+│   ├── About
+│   ├── Contact
+│   └── Footer
+├── data
+├── assets
+├── hooks
+└── utils
+```
+
+---
+
+# ⚡ Performance Requirements
+
+- Fast loading speed
+- SEO optimized
+- Image optimization
+- Lazy loading
+- Accessibility support
+
+---
+
+# 🎯 Final Goal
+
+The goal of WOW Cafe is to create a modern, elegant, and memorable digital café experience that reflects premium coffee culture while providing users with a smooth and engaging browsing experience.
+
+---
+
+# 👨‍💻 Developed By
+
+Powered by Dexber
