@@ -30,27 +30,25 @@ export default function ReviewsSection() {
     {
       id: "demo2",
       name: "Ahmed Hassan",
-      imageUrl: "/assets/sweets/WhatsApp Image 2026-05-21 at 6.14.02 PM.jpeg",
+      imageUrl: "/assets/sweets/croisant-plain.jpeg",
       timestamp: new Date(),
     },
     {
       id: "demo3",
       name: "Sara Mohammed",
-      imageUrl:
-        "/assets/hot-drinks/WhatsApp Image 2026-05-21 at 6.14.25 PM.jpeg",
+      imageUrl: "/assets/hot-drinks/cappacino.jpeg",
       timestamp: new Date(),
     },
     {
       id: "demo4",
       name: "Omar Al-Farsi",
-      imageUrl:
-        "/assets/cold-drinks/WhatsApp Image 2026-05-21 at 6.14.04 PM.jpeg",
+      imageUrl: "/assets/cold-drinks/blu-mojito.jpeg",
       timestamp: new Date(),
     },
     {
       id: "demo5",
       name: "Layla Nasser",
-      imageUrl: "/assets/sweets/WhatsApp Image 2026-05-21 at 6.14.05 PM.jpeg",
+      imageUrl: "/assets/sweets/lemon-cake.jpeg",
       timestamp: new Date(),
     },
   ]);

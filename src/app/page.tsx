@@ -2,6 +2,7 @@ import BannerOne from "./components/Banner";
 import LocationSection from "./components/LocationSection";
 import MenuSection from "./home/MenuSection";
 import ReviewsSection from "./home/ReviewsSection";
+import GallerySection from "./home/GallerySection";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       {/* Hero section can be added here later */}
       <BannerOne />
       <MenuSection />
+      <GallerySection />
       <LocationSection />
       <ReviewsSection />
     </div>

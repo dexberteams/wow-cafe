@@ -48,17 +48,18 @@ const handleLove = (id: string) => {
   return (
     <div className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
       {/* Image Container */}
-      <div onClick={() => setSelectedMenuItem(item)} className="relative w-full h-36 md:h-52 lg:h-72 overflow-hidden p-2 rounded-lg cursor-pointer" >
-        <Image
-          src={item.image}
-          alt={item.name}
-          fill
-          loading="eager"
-          sizes="(max-width: 768px) 50vw, 33vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500 p-1 rounded-lg"
-        />
-        
-      </div>
+      <div
+  onClick={() => setSelectedMenuItem(item)}
+  className="relative w-full h-[150px] md:h-[250px] lg:h-[300px] overflow-hidden cursor-pointer"
+>
+  <Image
+    src={item.image}
+    alt={item.name}
+    fill
+    sizes="100vw"
+    className="object-cover group-hover:scale-105 transition-transform duration-500"
+  />
+</div>
 
       {/* Content */}
       <div className=" p-2 lg:p-4 flex flex-col flex-grow relative h-28 lg:h-[188px]">
@@ -119,7 +120,7 @@ const handleLove = (id: string) => {
                     <p className="text-[9px] font-semibold lg:text-xs text-gray-600 break-words whitespace-normal">
                         {reactions[item.id] > 0
                             ? " You & others loved it."
-                            : "Give some love"}
+                            : "Add to favorite"}
                     </p>
 
                 </div>
