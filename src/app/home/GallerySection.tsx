@@ -2,7 +2,14 @@
 
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
-import { Upload, ChevronLeft, ChevronRight, X, ImageIcon, Camera } from "lucide-react";
+import {
+  Upload,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  ImageIcon,
+  Camera,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface GalleryItem {
@@ -67,7 +74,7 @@ export default function GallerySection() {
       const file = e.dataTransfer.files[0];
       if (file && file.type.startsWith("image/")) handleImageChange(file);
     },
-    [handleImageChange]
+    [handleImageChange],
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -114,7 +121,7 @@ export default function GallerySection() {
           className="text-2xl md:text-4xl font-bold text-primary mb-2"
           style={{ fontFamily: "var(--font-dm-serif)" }}
         >
-          Cafe Gallery
+          WoW Cafe Gallery
         </h2>
         <p
           className="text-[12px] lg:text-[14px] text-gray-500 max-w-xl mx-auto"
@@ -146,7 +153,11 @@ export default function GallerySection() {
                 Upload a photo to add it to the live gallery showcase.
               </p>
 
-              <form onSubmit={handleSubmit} autoComplete="off" className="space-y-4">
+              <form
+                onSubmit={handleSubmit}
+                autoComplete="off"
+                className="space-y-4"
+              >
                 {/* Image Upload */}
                 <div>
                   <label
@@ -217,7 +228,9 @@ export default function GallerySection() {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={(e) => handleImageChange(e.target.files?.[0] ?? null)}
+                      onChange={(e) =>
+                        handleImageChange(e.target.files?.[0] ?? null)
+                      }
                     />
                   </div>
                   {imageError && (
@@ -238,8 +251,18 @@ export default function GallerySection() {
                 >
                   {submitted ? (
                     <span className="flex items-center justify-center gap-2">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
                       </svg>
                       Photo Added!
                     </span>
@@ -304,10 +327,17 @@ export default function GallerySection() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
                   className="flex-none rounded-lg shadow-lg border border-primary/10 overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
-                  style={{ scrollSnapAlign: "start", width: "220px", minWidth: "220px" }}
+                  style={{
+                    scrollSnapAlign: "start",
+                    width: "220px",
+                    minWidth: "220px",
+                  }}
                   onClick={() => openLightbox(item.imageUrl)}
                 >
-                  <div className="relative overflow-hidden" style={{ width: "220px", height: "220px" }}>
+                  <div
+                    className="relative overflow-hidden"
+                    style={{ width: "220px", height: "220px" }}
+                  >
                     <Image
                       src={item.imageUrl}
                       alt="Gallery photo"
@@ -341,7 +371,10 @@ export default function GallerySection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-            style={{ backgroundColor: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)" }}
+            style={{
+              backgroundColor: "rgba(0,0,0,0.85)",
+              backdropFilter: "blur(8px)",
+            }}
             onClick={closeLightbox}
           >
             <motion.div
