@@ -139,7 +139,7 @@ const menuData: Record<string, MenuItem[]> = {
       image: "/assets/sweets/lemon-cake.jpeg",
     },
   ],
-  mohito: [
+  mojito: [
     {
       id: "c1",
       name: "Blue mojito",
@@ -343,7 +343,7 @@ const categories = [
   { id: "sweets", label: "Sweets", icon: Cake },
   { id: "hot-coffee", label: "Hot Drinks", icon: Coffee },
   { id: "cold-coffee", label: "Cold Drinks", icon: CupSoda },
-  { id: "mohito", label: "Mohitos", icon: Wine },
+  { id: "mojito", label: "Mojitos", icon: Wine },
 ];
 
 const MenuSection = () => {
