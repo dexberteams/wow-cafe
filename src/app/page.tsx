@@ -10,8 +10,8 @@ export default function Home() {
       {/* Hero section can be added here later */}
       <BannerOne />
       <MenuSection />
-      <GallerySection />
       <LocationSection />
+      <GallerySection />
       <ReviewsSection />
     </div>
   );
