@@ -136,7 +136,7 @@ export default function GallerySection() {
         <div>
           <button
             onClick={() => setIsUploadOpen(true)}
-            className="text-[12px] lg:text-[16px] bg-primary text-white p-2 lg:p-4 rounded-lg hover:bg-primary/80 transition-colors duration-300"
+            className="text-[12px] lg:text-[16px] bg-primary text-white p-4 lg:p-6 rounded-lg hover:bg-primary/80 transition-colors duration-300"
           >
             Upload Photo
           </button>
@@ -315,7 +315,6 @@ export default function GallerySection() {
                   Upload a photo to add it to the live gallery showcase.
                 </p>
 
-                {/* এখানে তোমার পুরো Form paste করবে */}
                 <form
                   onSubmit={handleSubmit}
                   autoComplete="off"
