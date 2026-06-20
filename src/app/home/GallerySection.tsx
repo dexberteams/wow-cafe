@@ -54,6 +54,7 @@ export default function GallerySection() {
   const [imageError, setImageError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -92,6 +93,7 @@ export default function GallerySection() {
     setImageFile(null);
     setPreviewUrl(null);
     setSubmitted(true);
+    setIsUploadOpen(false);
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -116,167 +118,33 @@ export default function GallerySection() {
   return (
     <section className="bg-soft-bg pt-6 pb-16 lg:pt-10 lg:pb-20">
       {/* Section Header */}
-      <div className="text-center mb-5 lg:mb-10">
-        <h2
-          className="text-2xl md:text-4xl font-bold text-primary mb-2"
-          style={{ fontFamily: "var(--font-dm-serif)" }}
-        >
-          WoW Cafe Gallery
-        </h2>
-        <p
-          className="text-[12px] lg:text-[14px] text-gray-500 max-w-xl mx-auto"
-          style={{ fontFamily: "var(--font-nunito)" }}
-        >
-          Explore our cafe's most beautiful moments and latest dishes.
-        </p>
-      </div>
-
-      <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-8 p-4">
-        {/* ─── PART 1: UPLOAD FORM ─── */}
-        <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
-          <div className="relative bg-white rounded-lg shadow-xl overflow-hidden border-2 border-primary">
-            <div className="h-2 w-full" />
-            <div className="p-3 lg:p-6 md:p-10">
-              <div className="flex items-center gap-3 mb-1">
-                <Camera className="w-5 h-5 text-primary" />
-                <h2
-                  className="text-[16px] md:text-2xl font-bold text-primary"
-                  style={{ fontFamily: "var(--font-dm-serif)" }}
-                >
-                  Add Cafe Photos
-                </h2>
-              </div>
-              <p
-                className="text-xs text-gray-400 mb-4 lg:mb-8"
-                style={{ fontFamily: "var(--font-nunito)" }}
-              >
-                Upload a photo to add it to the live gallery showcase.
-              </p>
-
-              <form
-                onSubmit={handleSubmit}
-                autoComplete="off"
-                className="space-y-4"
-              >
-                {/* Image Upload */}
-                <div>
-                  <label
-                    className="block text-sm font-semibold text-gray-600 mb-2"
-                    style={{ fontFamily: "var(--font-nunito)" }}
-                  >
-                    Upload Photo
-                  </label>
-
-                  <div
-                    onClick={() => fileInputRef.current?.click()}
-                    onDragOver={(e) => {
-                      e.preventDefault();
-                      setDragOver(true);
-                    }}
-                    onDragLeave={() => setDragOver(false)}
-                    onDrop={handleDrop}
-                    className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${
-                      dragOver
-                        ? "border-primary bg-primary/5 scale-[1.01]"
-                        : imageError
-                          ? "border-red-400 bg-red-50"
-                          : "border-gray-300 bg-gray-50 hover:border-primary hover:bg-primary/5"
-                    }`}
-                    style={{ minHeight: "180px" }}
-                  >
-                    {previewUrl ? (
-                      <div className="relative w-full h-52">
-                        <Image
-                          src={previewUrl}
-                          alt="Preview"
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                          <p
-                            className="text-white text-sm font-semibold"
-                            style={{ fontFamily: "var(--font-nunito)" }}
-                          >
-                            Click to change
-                          </p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center justify-center gap-3 py-10">
-                        <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                          <Upload className="w-6 h-6 text-primary" />
-                        </div>
-                        <div className="text-center">
-                          <p
-                            className="text-sm font-semibold text-primary"
-                            style={{ fontFamily: "var(--font-nunito)" }}
-                          >
-                            Click to upload or drag &amp; drop
-                          </p>
-                          <p
-                            className="text-xs text-gray-400 mt-1"
-                            style={{ fontFamily: "var(--font-nunito)" }}
-                          >
-                            PNG, JPG, WEBP up to 10MB
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept="image/*"
-                      className="hidden"
-                      onChange={(e) =>
-                        handleImageChange(e.target.files?.[0] ?? null)
-                      }
-                    />
-                  </div>
-                  {imageError && (
-                    <p
-                      className="text-red-500 text-xs mt-1"
-                      style={{ fontFamily: "var(--font-nunito)" }}
-                    >
-                      Please upload a photo.
-                    </p>
-                  )}
-                </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  className="w-full py-3 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95"
-                  style={{ fontFamily: "var(--font-nunito)" }}
-                >
-                  {submitted ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      Photo Added!
-                    </span>
-                  ) : (
-                    "Add to Gallery"
-                  )}
-                </button>
-              </form>
-            </div>
-          </div>
+      <div className="flex justify-between items-center mb-5 lg:mb-10 p-2 lg:p-8 gap-2">
+        <div className="">
+          <h2
+            className="text-2xl md:text-4xl font-bold text-primary mb-2"
+            style={{ fontFamily: "var(--font-dm-serif)" }}
+          >
+            <span className="text-5xl align-middle">و</span> Cafe Gallery
+          </h2>
+          <p
+            className="w-2/3 lg:w-full text-[12px] lg:text-[14px] text-gray-500"
+            style={{ fontFamily: "var(--font-nunito)" }}
+          >
+            Explore our cafe's most beautiful moments.
+          </p>
         </div>
-
+        <div>
+          <button
+            onClick={() => setIsUploadOpen(true)}
+            className="text-[12px] lg:text-[16px] bg-primary text-white p-2 lg:p-4 rounded-lg hover:bg-primary/80 transition-colors duration-300"
+          >
+            Upload Photo
+          </button>
+        </div>
+      </div>
+      <div className="w-full">
         {/* ─── PART 2: CAROUSEL ─── */}
-        <div className="w-full lg:w-2/3">
+        <div className="w-full p-4 lg:p-8">
           <div className="flex items-center justify-between lg:mt-10">
             <h2
               className="text-xl md:text-2xl font-bold text-primary mb-6"
@@ -362,7 +230,6 @@ export default function GallerySection() {
           `}</style>
         </div>
       </div>
-
       {/* ─── LIGHTBOX ─── */}
       <AnimatePresence>
         {lightboxImage && (
@@ -399,6 +266,174 @@ export default function GallerySection() {
                   unoptimized
                   className="object-contain"
                 />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* ─── UPLOAD MODAL ───*/}
+      <AnimatePresence>
+        {isUploadOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setIsUploadOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative bg-white rounded-xl shadow-2xl w-full max-w-xl overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsUploadOpen(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-red-500 hover:text-white transition"
+              >
+                <X className="w-5 h-5 mx-auto" />
+              </button>
+
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <Camera className="w-5 h-5 text-primary" />
+                  <h2
+                    className="text-2xl font-bold text-primary"
+                    style={{ fontFamily: "var(--font-dm-serif)" }}
+                  >
+                    Add Cafe Photos
+                  </h2>
+                </div>
+
+                <p
+                  className="text-sm text-gray-500 mb-6"
+                  style={{ fontFamily: "var(--font-nunito)" }}
+                >
+                  Upload a photo to add it to the live gallery showcase.
+                </p>
+
+                {/* এখানে তোমার পুরো Form paste করবে */}
+                <form
+                  onSubmit={handleSubmit}
+                  autoComplete="off"
+                  className="space-y-4"
+                >
+                  {/* Image Upload */}
+                  <div>
+                    <label
+                      className="block text-sm font-semibold text-gray-600 mb-2"
+                      style={{ fontFamily: "var(--font-nunito)" }}
+                    >
+                      Upload Photo
+                    </label>
+
+                    <div
+                      onClick={() => fileInputRef.current?.click()}
+                      onDragOver={(e) => {
+                        e.preventDefault();
+                        setDragOver(true);
+                      }}
+                      onDragLeave={() => setDragOver(false)}
+                      onDrop={handleDrop}
+                      className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${
+                        dragOver
+                          ? "border-primary bg-primary/5 scale-[1.01]"
+                          : imageError
+                            ? "border-red-400 bg-red-50"
+                            : "border-gray-300 bg-gray-50 hover:border-primary hover:bg-primary/5"
+                      }`}
+                      style={{ minHeight: "180px" }}
+                    >
+                      {previewUrl ? (
+                        <div className="relative w-full h-52">
+                          <Image
+                            src={previewUrl}
+                            alt="Preview"
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <p
+                              className="text-white text-sm font-semibold"
+                              style={{ fontFamily: "var(--font-nunito)" }}
+                            >
+                              Click to change
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center gap-3 py-10">
+                          <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                            <Upload className="w-6 h-6 text-primary" />
+                          </div>
+                          <div className="text-center">
+                            <p
+                              className="text-sm font-semibold text-primary"
+                              style={{ fontFamily: "var(--font-nunito)" }}
+                            >
+                              Click to upload or drag &amp; drop
+                            </p>
+                            <p
+                              className="text-xs text-gray-400 mt-1"
+                              style={{ fontFamily: "var(--font-nunito)" }}
+                            >
+                              PNG, JPG, WEBP up to 10MB
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) =>
+                          handleImageChange(e.target.files?.[0] ?? null)
+                        }
+                      />
+                    </div>
+                    {imageError && (
+                      <p
+                        className="text-red-500 text-xs mt-1"
+                        style={{ fontFamily: "var(--font-nunito)" }}
+                      >
+                        Please upload a photo.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    className="w-full py-3 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95"
+                    style={{ fontFamily: "var(--font-nunito)" }}
+                  >
+                    {submitted ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        Photo Added!
+                      </span>
+                    ) : (
+                      "Add to Gallery"
+                    )}
+                  </button>
+                </form>
               </div>
             </motion.div>
           </motion.div>

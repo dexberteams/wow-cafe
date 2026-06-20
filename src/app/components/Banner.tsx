@@ -23,7 +23,7 @@ const BannerOne: React.FC<BannerOneProps> = ({
   onSecondaryCtaClick,
 }) => {
   return (
-    <section className="relative w-full h-[300px] lg:h-[500px]  flex items-center justify-center overflow-hidden font-sans bg-stone-950 border-2 border-green">
+    <section className="relative w-full h-[300px] lg:h-[500px]  flex items-center justify-center overflow-hidden font-sans bg-stone-950">
       {/* Background Image - Clean, bright, and clearly highlighted */}
       <div className="absolute inset-0 z-0">
         <Image

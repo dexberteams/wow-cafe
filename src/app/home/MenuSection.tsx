@@ -1,11 +1,84 @@
 "use client";
 
 import { useState } from "react";
-import { Cake, Coffee, CupSoda } from "lucide-react";
+import { Cake, Coffee, Croissant, CupSoda, Wine } from "lucide-react";
 import MenuCard, { MenuItem } from "../components/MenuCard";
 
 const menuData: Record<string, MenuItem[]> = {
-  "sweets-bakery": [
+  bakery: [
+    {
+      id: "b1",
+      name: "Chicken cajun",
+      price: "13 SAR",
+      description:
+        "Spicy cajun chicken with lettuce and house sauce in fresh bread.",
+      rating: 4.8,
+      image: "/assets/sweets/chiken-cajun.jpeg",
+    },
+    {
+      id: "b2",
+      name: "Croissant plain",
+      price: "9 SAR",
+      description: "Buttery, flaky, and golden-brown baked fresh daily.",
+      rating: 4.7,
+      image: "/assets/sweets/croisant-plain.jpeg",
+    },
+    {
+      id: "b3",
+      name: "Croissant almond",
+      price: "11 SAR",
+      description:
+        "Filled with rich almond frangipane and topped with sliced almonds.",
+      rating: 4.8,
+      image: "/assets/sweets/croissant-almond.jpeg",
+    },
+    {
+      id: "b4",
+      name: "Croissant cheese",
+      price: "11 SAR",
+      description: "Flaky croissant baked with savory cheddar cheese filling.",
+      rating: 4.6,
+      image: "/assets/sweets/croissant-cheese.jpeg",
+    },
+    {
+      id: "b5",
+      name: "Hallumi sandwich",
+      price: "13 SAR",
+      description:
+        "Grilled halloumi cheese with fresh vegetables and pesto spread.",
+      rating: 4.7,
+      image: "/assets/sweets/hallomi-sandwich.jpeg",
+    },
+
+    {
+      id: "b6",
+      name: "Tuna sandwich",
+      price: "13 SAR",
+      description:
+        "Creamy tuna salad with herbs and greens on freshly baked bread.",
+      rating: 4.6,
+      image: "/assets/sweets/sandwich-tuna.jpeg",
+    },
+    {
+      id: "b7",
+      name: "Turkey sandwich",
+      price: "13 SAR",
+      description:
+        "Smoked turkey breast with cheese, lettuce, and honey mustard.",
+      rating: 4.8,
+      image: "/assets/sweets/smoke-turkey-sandwich.jpeg",
+    },
+    {
+      id: "b8",
+      name: "Mexican sandwich",
+      price: "13 SAR",
+      description:
+        "Tender chicken with spicy jalapenos, salsa, and melted cheese.",
+      rating: 4.9,
+      image: "/assets/sweets/spicy-chicken-maxican.jpeg",
+    },
+  ],
+  sweets: [
     // {
     //   id: "s1",
     //   name: "Wow special brownie",
@@ -16,43 +89,46 @@ const menuData: Record<string, MenuItem[]> = {
     // },
     {
       id: "s2",
-      name: "Chicken cajun",
-      price: "13 SAR",
-      description: "Spicy cajun chicken with lettuce and house sauce in fresh bread.",
-      rating: 4.8,
-      image: "/assets/sweets/chiken-cajun.jpeg",
+      name: "Zafran cake",
+      price: "16 SAR",
+      description:
+        "Decadent sponge cake soaked in aromatic saffron-infused milk.",
+      rating: 4.9,
+      image: "/assets/sweets/zafran-cake.jpeg",
     },
     {
       id: "s3",
-      name: "Croissant plain",
-      price: "9 SAR",
-      description: "Buttery, flaky, and golden-brown baked fresh daily.",
-      rating: 4.7,
-      image: "/assets/sweets/croisant-plain.jpeg",
+      name: "Triple chocolate cake",
+      price: "14 SAR",
+      description:
+        "Rich chocolate cake layered with milk, dark, and white chocolate.",
+      rating: 4.9,
+      image: "/assets/sweets/triple-choklate.jpeg",
     },
     {
       id: "s4",
-      name: "Croissant almond",
+      name: "Wow chocolate cookies",
       price: "11 SAR",
-      description: "Filled with rich almond frangipane and topped with sliced almonds.",
+      description:
+        "Soft-baked cookies loaded with premium dark chocolate chunks.",
       rating: 4.8,
-      image: "/assets/sweets/croissant-almond.jpeg",
+      image: "/assets/sweets/wow-choklate-cookies.jpeg",
     },
     {
       id: "s5",
-      name: "Croissant cheese",
-      price: "11 SAR",
-      description: "Flaky croissant baked with savory cheddar cheese filling.",
-      rating: 4.6,
-      image: "/assets/sweets/croissant-cheese.jpeg",
+      name: "Marble cake",
+      price: "8 SAR",
+      description: "Classic swirl of vanilla and chocolate sponge cake.",
+      rating: 4.5,
+      image: "/assets/sweets/marble-cake.jpeg",
     },
     {
       id: "s6",
-      name: "Hallumi sandwich",
-      price: "13 SAR",
-      description: "Grilled halloumi cheese with fresh vegetables and pesto spread.",
-      rating: 4.7,
-      image: "/assets/sweets/hallomi-sandwich.jpeg",
+      name: "Mix brownies bites",
+      price: "11 SAR",
+      description: "Assorted bite-sized chocolate fudge and walnut brownies.",
+      rating: 4.9,
+      image: "/assets/sweets/mix-brownies-bites.jpeg",
     },
     {
       id: "s7",
@@ -62,69 +138,43 @@ const menuData: Record<string, MenuItem[]> = {
       rating: 4.6,
       image: "/assets/sweets/lemon-cake.jpeg",
     },
+  ],
+  mohito: [
     {
-      id: "s8",
-      name: "Marble cake",
-      price: "8 SAR",
-      description: "Classic swirl of vanilla and chocolate sponge cake.",
-      rating: 4.5,
-      image: "/assets/sweets/marble-cake.jpeg",
-    },
-    {
-      id: "s9",
-      name: "Mix brownies bites",
-      price: "11 SAR",
-      description: "Assorted bite-sized chocolate fudge and walnut brownies.",
-      rating: 4.9,
-      image: "/assets/sweets/mix-brownies-bites.jpeg",
-    },
-    {
-      id: "s10",
-      name: "Tuna sandwich",
-      price: "13 SAR",
-      description: "Creamy tuna salad with herbs and greens on freshly baked bread.",
-      rating: 4.6,
-      image: "/assets/sweets/sandwich-tuna.jpeg",
-    },
-    {
-      id: "s11",
-      name: "Turkey sandwich",
-      price: "13 SAR",
-      description: "Smoked turkey breast with cheese, lettuce, and honey mustard.",
+      id: "c1",
+      name: "Blue mojito",
+      price: "17 SAR",
+      description:
+        "Refreshing blue curacao mixed with fresh mint, lime, and soda.",
       rating: 4.8,
-      image: "/assets/sweets/smoke-turkey-sandwich.jpeg",
+      image: "/assets/cold-drinks/blu-mojito.jpeg",
     },
     {
-      id: "s12",
-      name: "Mexican sandwich",
-      price: "13 SAR",
-      description: "Tender chicken with spicy jalapenos, salsa, and melted cheese.",
-      rating: 4.9,
-      image: "/assets/sweets/spicy-chicken-maxican.jpeg",
-    },
-    {
-      id: "s13",
-      name: "Triple chocolate cake",
-      price: "14 SAR",
-      description: "Rich chocolate cake layered with milk, dark, and white chocolate.",
-      rating: 4.9,
-      image: "/assets/sweets/triple-choklate.jpeg",
-    },
-    {
-      id: "s14",
-      name: "Wow chocolate cookies",
-      price: "11 SAR",
-      description: "Soft-baked cookies loaded with premium dark chocolate chunks.",
+      id: "c7",
+      name: "Mix mojito",
+      price: "17 SAR",
+      description:
+        "Classic mint and lime mojito with a blend of sweet berry flavors.",
       rating: 4.8,
-      image: "/assets/sweets/wow-choklate-cookies.jpeg",
+      image: "/assets/cold-drinks/mix-mojito.jpeg",
     },
     {
-      id: "s15",
-      name: "Zafran cake",
-      price: "16 SAR",
-      description: "Decadent sponge cake soaked in aromatic saffron-infused milk.",
+      id: "c9",
+      name: "Passion mojito",
+      price: "17 SAR",
+      description:
+        "Sparkling soda with fresh mint, lime, and sweet passion fruit puree.",
       rating: 4.9,
-      image: "/assets/sweets/zafran-cake.jpeg",
+      image: "/assets/cold-drinks/passion-mojito.jpeg",
+    },
+    {
+      id: "c10",
+      name: "Strawberry mojito",
+      price: "17 SAR",
+      description:
+        "Sweet strawberries muddled with fresh mint, lime, and sparkling soda.",
+      rating: 4.9,
+      image: "/assets/cold-drinks/strawberry-mojito.jpeg",
     },
   ],
   "hot-coffee": [
@@ -132,7 +182,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "h1",
       name: "Cappuccino",
       price: "14 SAR",
-      description: "Rich espresso topped with steamed milk and a thick layer of foam.",
+      description:
+        "Rich espresso topped with steamed milk and a thick layer of foam.",
       rating: 4.8,
       image: "/assets/hot-drinks/cappacino.jpeg",
     },
@@ -156,7 +207,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "h4",
       name: "Flat white",
       price: "14 SAR",
-      description: "Double shot of espresso with microfoam for a smooth texture.",
+      description:
+        "Double shot of espresso with microfoam for a smooth texture.",
       rating: 4.8,
       image: "/assets/hot-drinks/flat-white.jpeg",
     },
@@ -164,7 +216,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "h5",
       name: "Hot chocolate",
       price: "16 SAR",
-      description: "Rich, creamy cocoa topped with marshmallows or whipped cream.",
+      description:
+        "Rich, creamy cocoa topped with marshmallows or whipped cream.",
       rating: 4.9,
       image: "/assets/hot-drinks/hot-choklate.jpeg",
     },
@@ -172,7 +225,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "h6",
       name: "Hot latte",
       price: "14 SAR",
-      description: "Classic espresso combined with steamed milk and a thin layer of foam.",
+      description:
+        "Classic espresso combined with steamed milk and a thin layer of foam.",
       rating: 4.7,
       image: "/assets/hot-drinks/latte-hot.jpeg",
     },
@@ -180,7 +234,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "h7",
       name: "Hot mocha",
       price: "19 SAR",
-      description: "Espresso blended with dark chocolate and velvety steamed milk.",
+      description:
+        "Espresso blended with dark chocolate and velvety steamed milk.",
       rating: 4.8,
       image: "/assets/hot-drinks/mocha-hot.jpeg",
     },
@@ -203,14 +258,6 @@ const menuData: Record<string, MenuItem[]> = {
   ],
   "cold-coffee": [
     {
-      id: "c1",
-      name: "Blue mojito",
-      price: "17 SAR",
-      description: "Refreshing blue curacao mixed with fresh mint, lime, and soda.",
-      rating: 4.8,
-      image: "/assets/cold-drinks/blu-mojito.jpeg",
-    },
-    {
       id: "c2",
       name: "Coffee day cold",
       price: "7/10/12 SAR",
@@ -222,7 +269,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "c3",
       name: "Ice karkade",
       price: "14/16 SAR",
-      description: "Chilled and sweetened hibiscus tea with a tart, refreshing flavor.",
+      description:
+        "Chilled and sweetened hibiscus tea with a tart, refreshing flavor.",
       rating: 4.7,
       image: "/assets/cold-drinks/ice-karkade.jpeg",
     },
@@ -246,18 +294,12 @@ const menuData: Record<string, MenuItem[]> = {
       id: "c6",
       name: "Spanish cold",
       price: "16/18 SAR",
-      description: "Chilled latte sweetened with condensed milk and served over ice.",
+      description:
+        "Chilled latte sweetened with condensed milk and served over ice.",
       rating: 4.9,
       image: "/assets/cold-drinks/ice-spanish-latte.jpeg",
     },
-    {
-      id: "c7",
-      name: "Mix mojito",
-      price: "17 SAR",
-      description: "Classic mint and lime mojito with a blend of sweet berry flavors.",
-      rating: 4.8,
-      image: "/assets/cold-drinks/mix-mojito.jpeg",
-    },
+
     {
       id: "c8",
       name: "Cold mocha",
@@ -266,22 +308,7 @@ const menuData: Record<string, MenuItem[]> = {
       rating: 4.8,
       image: "/assets/cold-drinks/mocha-cold.jpeg",
     },
-    {
-      id: "c9",
-      name: "Passion mojito",
-      price: "17 SAR",
-      description: "Sparkling soda with fresh mint, lime, and sweet passion fruit puree.",
-      rating: 4.9,
-      image: "/assets/cold-drinks/passion-mojito.jpeg",
-    },
-    {
-      id: "c10",
-      name: "Strawberry mojito",
-      price: "17 SAR",
-      description: "Sweet strawberries muddled with fresh mint, lime, and sparkling soda.",
-      rating: 4.9,
-      image: "/assets/cold-drinks/strawberry-mojito.jpeg",
-    },
+
     {
       id: "c11",
       name: "Coffee day cold",
@@ -294,7 +321,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "c12",
       name: "Cold brew",
       price: "21 SAR",
-      description: "Slow-steeped specialty coffee beans for an exceptionally smooth taste.",
+      description:
+        "Slow-steeped specialty coffee beans for an exceptionally smooth taste.",
       rating: 4.8,
       image: "/assets/hot-drinks/cold-brew.jpeg",
     },
@@ -302,7 +330,8 @@ const menuData: Record<string, MenuItem[]> = {
       id: "c13",
       name: "Iced Spanish Latte (Premium)",
       price: "18 SAR",
-      description: "Rich espresso shot with condensed milk over custom crushed ice.",
+      description:
+        "Rich espresso shot with condensed milk over custom crushed ice.",
       rating: 4.9,
       image: "/assets/hot-drinks/ice-spanish-latte.jpeg",
     },
@@ -310,13 +339,15 @@ const menuData: Record<string, MenuItem[]> = {
 };
 
 const categories = [
-  { id: "sweets-bakery", label: "Sweets & Bakery", icon: Cake },
+  { id: "bakery", label: "Bakery", icon: Croissant },
+  { id: "sweets", label: "Sweets", icon: Cake },
   { id: "hot-coffee", label: "Hot Drinks", icon: Coffee },
   { id: "cold-coffee", label: "Cold Drinks", icon: CupSoda },
+  { id: "mohito", label: "Mohitos", icon: Wine },
 ];
 
 const MenuSection = () => {
-  const [activeTab, setActiveTab] = useState("sweets-bakery");
+  const [activeTab, setActiveTab] = useState("bakery");
 
   return (
     <section className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-soft-bg min-h-screen">
@@ -332,7 +363,7 @@ const MenuSection = () => {
 
         {/* Tab Navigation */}
         <div className="sticky top-20 z-40 bg-soft-bg/95 backdrop-blur-sm  lg:py-4 mb-6 -mx-4 px-4 md:mx-0 md:px-0 flex justify-center border-b border-transparent">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 w-full max-w-3xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 w-full max-w-3xl">
             {categories.map((category) => {
               const Icon = category.icon;
               const isActive = activeTab === category.id;
