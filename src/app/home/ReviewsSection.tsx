@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import {
   X,
@@ -11,6 +11,8 @@ import {
   ChevronRight,
   ImageIcon,
 } from "lucide-react";
+import { uploadImage } from "../../utils/utils";
+import { createReview, getReviews } from "../../utils/reviewActions";
 
 interface Review {
   id: string;
@@ -63,6 +65,56 @@ export default function ReviewsSection() {
   const [nameError, setNameError] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  useEffect(() => {
+    async function fetchReviews() {
+      const res = await getReviews();
+      if (res.success && res.data) {
+        const dbReviews = res.data.map((r: any) => ({
+          id: r.id,
+          name: r.userName,
+          imageUrl: r.image || "",
+          timestamp: r.createdAt
+        }));
+        setReviews(prev => {
+          const staticReviews = [
+            {
+              id: "demo1",
+              name: "Fatima Al-Rashidi",
+              imageUrl: "/assets/WhatsApp Image 2026-05-21 at 6.14.24 PM (2).jpeg",
+              timestamp: new Date(),
+            },
+            {
+              id: "demo2",
+              name: "Ahmed Hassan",
+              imageUrl: "/assets/sweets/croisant-plain.jpeg",
+              timestamp: new Date(),
+            },
+            {
+              id: "demo3",
+              name: "Sara Mohammed",
+              imageUrl: "/assets/hot-drinks/cappacino.jpeg",
+              timestamp: new Date(),
+            },
+            {
+              id: "demo4",
+              name: "Omar Al-Farsi",
+              imageUrl: "/assets/cold-drinks/blu-mojito.jpeg",
+              timestamp: new Date(),
+            },
+            {
+              id: "demo5",
+              name: "Layla Nasser",
+              imageUrl: "/assets/sweets/lemon-cake.jpeg",
+              timestamp: new Date(),
+            },
+          ];
+          return [...dbReviews, ...staticReviews];
+        });
+      }
+    }
+    fetchReviews();
+  }, []);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +137,7 @@ export default function ReviewsSection() {
     [handleImageChange],
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let hasError = false;
     if (!name.trim()) {
@@ -98,18 +150,28 @@ export default function ReviewsSection() {
     }
     if (hasError) return;
 
-    const newReview: Review = {
-      id: Date.now().toString(),
-      name: name.trim(),
-      imageUrl: previewUrl!,
-      timestamp: new Date(),
-    };
-    setReviews((prev) => [newReview, ...prev]);
-    setName("");
-    setImageFile(null);
-    setPreviewUrl(null);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      const url = await uploadImage(imageFile!);
+      const res = await createReview(name.trim(), url);
+
+      if (res.success && res.data) {
+        const newReview: Review = {
+          id: res.data.id,
+          name: res.data.userName,
+          imageUrl: res.data.image || "",
+          timestamp: res.data.createdAt,
+        };
+        setReviews((prev) => [newReview, ...prev]);
+        setName("");
+        setImageFile(null);
+        setPreviewUrl(null);
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 3000);
+      }
+    } catch (error) {
+      console.error(error);
+      setImageError(true);
+    }
   };
 
   const openLightbox = (imageUrl: string, reviewerName: string) => {
@@ -197,11 +259,10 @@ export default function ReviewsSection() {
                         setNameError(false);
                       }}
                       placeholder="e.g. Sara Mohammed"
-                      className={`w-full pl-12 pr-4 py-4 rounded-lg border-2 outline-none text-gray-700 text-sm transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_rgba(74,89,82,0.1)] ${
-                        nameError
-                          ? "border-red-400 bg-red-50"
-                          : "border-gray-200 bg-gray-50"
-                      }`}
+                      className={`w-full pl-12 pr-4 py-4 rounded-lg border-2 outline-none text-gray-700 text-sm transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_rgba(74,89,82,0.1)] ${nameError
+                        ? "border-red-400 bg-red-50"
+                        : "border-gray-200 bg-gray-50"
+                        }`}
                       style={{ fontFamily: "var(--font-nunito)" }}
                     />
                   </div>
@@ -232,13 +293,12 @@ export default function ReviewsSection() {
                     }}
                     onDragLeave={() => setDragOver(false)}
                     onDrop={handleDrop}
-                    className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${
-                      dragOver
-                        ? "border-primary bg-primary/5 scale-[1.01]"
-                        : imageError
-                          ? "border-red-400 bg-red-50"
-                          : "border-gray-300 bg-gray-50 hover:border-primary hover:bg-primary/5"
-                    }`}
+                    className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${dragOver
+                      ? "border-primary bg-primary/5 scale-[1.01]"
+                      : imageError
+                        ? "border-red-400 bg-red-50"
+                        : "border-gray-300 bg-gray-50 hover:border-primary hover:bg-primary/5"
+                      }`}
                     style={{ minHeight: "150px" }}
                   >
                     {previewUrl ? (
@@ -423,14 +483,14 @@ export default function ReviewsSection() {
                       >
                         {review.name}
                       </p>
-                      <div className="flex gap-0.5 mt-0.5">
+                      {/* <div className="flex gap-0.5 mt-0.5">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
                             className="w-3 h-3 fill-amber-400 text-amber-400"
                           />
                         ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

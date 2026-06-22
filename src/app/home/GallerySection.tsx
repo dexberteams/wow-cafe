@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import {
   Upload,
@@ -11,7 +11,8 @@ import {
   Camera,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
+import { uploadImage } from "../../utils/utils";
+import { createGalleryImage, getGalleryImages } from "../../utils/galleryActions";
 interface GalleryItem {
   id: string;
   imageUrl: string;
@@ -56,6 +57,21 @@ export default function GallerySection() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 
+  useEffect(() => {
+    async function fetchGallery() {
+      const res = await getGalleryImages();
+      if (res.success && res.data) {
+        const dbItems = res.data.map((item: any) => ({
+          id: item.id,
+          imageUrl: item.image,
+          timestamp: item.createdAt,
+        }));
+        setGallery([...dbItems, ...initialGallery]);
+      }
+    }
+    fetchGallery();
+  }, []);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -78,23 +94,35 @@ export default function GallerySection() {
     [handleImageChange],
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!imageFile || !previewUrl) {
       setImageError(true);
       return;
     }
-    const newItem: GalleryItem = {
-      id: Date.now().toString(),
-      imageUrl: previewUrl,
-      timestamp: new Date(),
-    };
-    setGallery((prev) => [newItem, ...prev]);
-    setImageFile(null);
-    setPreviewUrl(null);
-    setSubmitted(true);
-    setIsUploadOpen(false);
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      const url = await uploadImage(imageFile);
+      const res = await createGalleryImage(url);
+
+      if (res.success && res.data) {
+        const newItem: GalleryItem = {
+          id: res.data.id,
+          imageUrl: res.data.image,
+          timestamp: res.data.createdAt,
+        };
+        setGallery((prev) => [newItem, ...prev]);
+        setImageFile(null);
+        setPreviewUrl(null);
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setIsUploadOpen(false);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error("Upload error", error);
+      setImageError(true);
+    }
   };
 
   const scrollCarousel = (dir: "left" | "right") => {
@@ -337,13 +365,12 @@ export default function GallerySection() {
                       }}
                       onDragLeave={() => setDragOver(false)}
                       onDrop={handleDrop}
-                      className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${
-                        dragOver
+                      className={`relative cursor-pointer rounded-lg border-2 border-dashed transition-all duration-300 overflow-hidden ${dragOver
                           ? "border-primary bg-primary/5 scale-[1.01]"
                           : imageError
                             ? "border-red-400 bg-red-50"
                             : "border-gray-300 bg-gray-50 hover:border-primary hover:bg-primary/5"
-                      }`}
+                        }`}
                       style={{ minHeight: "180px" }}
                     >
                       {previewUrl ? (
