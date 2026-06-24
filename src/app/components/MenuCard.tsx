@@ -32,7 +32,8 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
     async function fetchReaction() {
       const res = await getMenuReaction(item.id);
       if (res.success && res.data) {
-        setReactions(prev => ({ ...prev, [item.id]: res.data.count }));
+        const data = res.data;
+        setReactions(prev => ({ ...prev, [item.id]: data.count }));
       }
     }
     fetchReaction();
