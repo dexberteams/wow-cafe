@@ -1,9 +1,13 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { MapPin, Phone, Clock } from "lucide-react";
-import Image from "next/image";
+import { useLanguage } from "../../utils/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[#333333] text-gray-300 py-12 border-t border-[#444]">
       <div className="container mx-auto px-4 md:px-6">
@@ -11,12 +15,10 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4 font-[family-name:var(--font-dm-serif)] flex gap-2 items-center">
-              <span className="text-5xl align-middle">و</span>Cafe
+              <span className="text-5xl align-middle">و</span>{t("common.cafeName")}
             </h3>
             <p className="text-[12px] lg:text-[14px] mb-6 max-w-xs font-[family-name:var(--font-nunito)]">
-              Experience handcrafted coffee and unforgettable moments. We serve
-              high-quality handcrafted coffee with exceptional customer
-              experience.
+              {t("footer.footerDesc")}
             </p>
             <div className="flex gap-4 font-[family-name:var(--font-nunito)]">
               <Link
@@ -75,20 +77,20 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="font-[family-name:var(--font-nunito)]">
             <h4 className="text-lg font-semibold text-white mb-4">
-              Quick Links
+              {t("footer.quickLinks")}
             </h4>
             <ul className="space-y-1 text-[14px]">
               <li>
                 <Link href="/" className="hover:text-white transition-colors">
-                  Home
+                  {t("footer.linkHome")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#menu"
+                  href="/#menu"
                   className="hover:text-white transition-colors"
                 >
-                  Menu
+                  {t("footer.linkMenu")}
                 </Link>
               </li>
               <li>
@@ -96,23 +98,23 @@ const Footer = () => {
                   href="/about"
                   className="hover:text-white transition-colors"
                 >
-                  About
+                  {t("footer.linkAbout")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/reviews"
+                  href="/#reviews"
                   className="hover:text-white transition-colors"
                 >
-                  Reviews
+                  {t("footer.linkReviews")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   className="hover:text-white transition-colors"
                 >
-                  Contact
+                  {t("footer.linkContact")}
                 </Link>
               </li>
             </ul>
@@ -121,14 +123,14 @@ const Footer = () => {
           {/* Opening Hours */}
           <div className="font-[family-name:var(--font-nunito)]">
             <h4 className="text-lg font-semibold text-white mb-4">
-              Opening Hours
+              {t("footer.openingHours")}
             </h4>
             <ul className="space-y-2 text-[12px] lg:text-[14px]">
               <li className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-primary shrink-0" />
                 <div>
-                  <p className="text-white font-medium">Everyday</p>
-                  <p className="text-sm">24 Hours open</p>
+                  <p className="text-white font-medium">{t("footer.everyday")}</p>
+                  <p className="text-sm">{t("footer.everydaySub")}</p>
                 </div>
               </li>
             </ul>
@@ -137,12 +139,12 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="font-[family-name:var(--font-nunito)]">
             <h4 className="text-lg font-semibold text-white mb-4">
-              Contact Us
+              {t("footer.contactUs")}
             </h4>
             <ul className="space-y-2 text-[12px] lg:text-[14px]">
               <li className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-sm">Riyadh, Saudi Arabia</span>
+                <span className="text-sm">{t("footer.riyadhSa")}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
@@ -157,7 +159,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#444] text-[14px] text-center md:flex md:justify-between md:text-left font-[family-name:var(--font-nunito)]">
           <p>
-            &copy; {new Date().getFullYear()} WOW Cafe. All rights reserved.
+            &copy; {new Date().getFullYear()} {t("footer.allRights")}
           </p>
           <Link
             href="https://wa.me/qr/FFKEFHGBUVRZI1"
@@ -165,7 +167,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="mt-2 md:mt-0"
           >
-            Powered by Dexber
+            {t("footer.poweredBy")}
           </Link>
         </div>
       </div>
@@ -174,3 +176,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

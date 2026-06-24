@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Cake, Coffee, Croissant, CupSoda, Wine } from "lucide-react";
 import MenuCard, { MenuItem } from "../components/MenuCard";
+import { useLanguage } from "../../utils/LanguageContext";
 
 const menuData: Record<string, MenuItem[]> = {
   bakery: [
@@ -348,16 +349,17 @@ const categories = [
 
 const MenuSection = () => {
   const [activeTab, setActiveTab] = useState("bakery");
+  const { t } = useLanguage();
 
   return (
-    <section className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-soft-bg min-h-screen">
+    <section id="menu" className="pt-4 pb-10 lg:pt-8 lg:pb-16 bg-soft-bg min-h-screen">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-2 lg:mb-12">
           <h2 className="text-2xl md:text-4xl font-bold text-primary mb-2 font-[family-name:var(--font-dm-serif)]">
-            Our Menu's
+            {t("menu.title")}
           </h2>
           <p className="text-[12px] lg:text-[14px] text-gray-500 max-w-2xl mx-auto font-[family-name:var(--font-nunito)]">
-            Discover our carefully crafted selection of beverages and treats.
+            {t("menu.subtitle")}
           </p>
         </div>
 
@@ -393,7 +395,7 @@ const MenuSection = () => {
 
                   {/* Text */}
                   <span className="relative z-10 text-xs lg:text-sm md:text-base text-center font-semibold tracking-wide">
-                    {category.label}
+                    {t(`menu.categories.${category.id}`)}
                   </span>
                 </button>
               );

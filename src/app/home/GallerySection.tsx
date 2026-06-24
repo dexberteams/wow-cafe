@@ -13,6 +13,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { uploadImage } from "../../utils/utils";
 import { createGalleryImage, getGalleryImages } from "../../utils/galleryActions";
+import { useLanguage } from "../../utils/LanguageContext";
 interface GalleryItem {
   id: string;
   imageUrl: string;
@@ -56,6 +57,7 @@ export default function GallerySection() {
   const [submitted, setSubmitted] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     async function fetchGallery() {
@@ -152,21 +154,21 @@ export default function GallerySection() {
             className="text-2xl md:text-4xl font-bold text-primary mb-2"
             style={{ fontFamily: "var(--font-dm-serif)" }}
           >
-            <span className="text-5xl align-middle">و</span> Cafe Gallery
+            <span className="text-5xl align-middle">و</span> {t("gallery.title")}
           </h2>
           <p
             className="w-2/3 lg:w-full text-[12px] lg:text-[14px] text-gray-500"
             style={{ fontFamily: "var(--font-nunito)" }}
           >
-            Explore our cafe's most beautiful moments.
+            {t("gallery.subtitle")}
           </p>
         </div>
         <div>
           <button
             onClick={() => setIsUploadOpen(true)}
-            className="text-[12px] lg:text-[16px] bg-primary text-white p-4 lg:p-6 rounded-lg hover:bg-primary/80 transition-colors duration-300"
+            className="text-[12px] lg:text-[16px] bg-primary text-white p-4 lg:p-6 rounded-lg hover:bg-primary/80 transition-colors duration-300 cursor-pointer"
           >
-            Upload Photo
+            {t("gallery.uploadPhoto")}
           </button>
         </div>
       </div>
@@ -178,20 +180,20 @@ export default function GallerySection() {
               className="text-xl md:text-2xl font-bold text-primary mb-6"
               style={{ fontFamily: "var(--font-dm-serif)" }}
             >
-              Gallery Showcase
+              {t("gallery.galleryShowcase")}
             </h2>
             <div className="flex gap-2">
               <button
                 onClick={() => scrollCarousel("left")}
                 aria-label="Scroll left"
-                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300"
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => scrollCarousel("right")}
                 aria-label="Scroll right"
-                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300"
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -202,7 +204,7 @@ export default function GallerySection() {
             <div className="flex flex-col items-center justify-center py-20 text-gray-400">
               <ImageIcon className="w-14 h-14 mb-4 opacity-30" />
               <p style={{ fontFamily: "var(--font-nunito)" }}>
-                No photos yet. Be the first to add one!
+                {t("gallery.noPhotos")}
               </p>
             </div>
           ) : (
@@ -332,7 +334,7 @@ export default function GallerySection() {
                     className="text-2xl font-bold text-primary"
                     style={{ fontFamily: "var(--font-dm-serif)" }}
                   >
-                    Add Cafe Photos
+                    {t("gallery.addPhotosTitle")}
                   </h2>
                 </div>
 
@@ -340,7 +342,7 @@ export default function GallerySection() {
                   className="text-sm text-gray-500 mb-6"
                   style={{ fontFamily: "var(--font-nunito)" }}
                 >
-                  Upload a photo to add it to the live gallery showcase.
+                  {t("gallery.addPhotosSub")}
                 </p>
 
                 <form
@@ -354,7 +356,7 @@ export default function GallerySection() {
                       className="block text-sm font-semibold text-gray-600 mb-2"
                       style={{ fontFamily: "var(--font-nunito)" }}
                     >
-                      Upload Photo
+                      {t("gallery.uploadPhoto")}
                     </label>
 
                     <div
@@ -376,18 +378,18 @@ export default function GallerySection() {
                       {previewUrl ? (
                         <div className="relative w-full h-52">
                           <Image
-                            src={previewUrl}
-                            alt="Preview"
-                            fill
-                            className="object-cover"
-                            unoptimized
+                             src={previewUrl}
+                             alt="Preview"
+                             fill
+                             className="object-cover"
+                             unoptimized
                           />
                           <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                             <p
                               className="text-white text-sm font-semibold"
                               style={{ fontFamily: "var(--font-nunito)" }}
                             >
-                              Click to change
+                              {t("gallery.clickToChange")}
                             </p>
                           </div>
                         </div>
@@ -401,13 +403,13 @@ export default function GallerySection() {
                               className="text-sm font-semibold text-primary"
                               style={{ fontFamily: "var(--font-nunito)" }}
                             >
-                              Click to upload or drag &amp; drop
+                              {t("gallery.dragDrop")}
                             </p>
                             <p
                               className="text-xs text-gray-400 mt-1"
                               style={{ fontFamily: "var(--font-nunito)" }}
                             >
-                              PNG, JPG, WEBP up to 10MB
+                              {t("gallery.formatsLimit")}
                             </p>
                           </div>
                         </div>
@@ -427,7 +429,7 @@ export default function GallerySection() {
                         className="text-red-500 text-xs mt-1"
                         style={{ fontFamily: "var(--font-nunito)" }}
                       >
-                        Please upload a photo.
+                        {t("gallery.errPleaseUpload")}
                       </p>
                     )}
                   </div>
@@ -435,7 +437,7 @@ export default function GallerySection() {
                   {/* Submit */}
                   <button
                     type="submit"
-                    className="w-full py-3 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95"
+                    className="w-full py-3 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95 cursor-pointer"
                     style={{ fontFamily: "var(--font-nunito)" }}
                   >
                     {submitted ? (
@@ -453,10 +455,10 @@ export default function GallerySection() {
                             d="M5 13l4 4L19 7"
                           />
                         </svg>
-                        Photo Added!
+                        {t("gallery.photoAdded")}
                       </span>
                     ) : (
-                      "Add to Gallery"
+                      t("gallery.addToGallery")
                     )}
                   </button>
                 </form>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, Coffee, ArrowRight, MapPin } from "lucide-react";
+import { useLanguage } from "../../utils/LanguageContext";
 import Image from "next/image";
 
 interface BannerOneProps {
@@ -14,16 +14,14 @@ interface BannerOneProps {
   onSecondaryCtaClick?: () => void;
 }
 
-const BannerOne: React.FC<BannerOneProps> = ({
-  heading = "Choose quality over quantity!",
-  subheading = "Experience handcrafted coffee and unforgettable moments at WOW Cafe.",
-  primaryCtaText = "Explore Menu",
-  secondaryCtaText = "Visit Us",
-  onPrimaryCtaClick,
-  onSecondaryCtaClick,
-}) => {
+const BannerOne: React.FC<BannerOneProps> = () => {
+  const { t } = useLanguage();
+
+  const headingText = t("banner.heading");
+  const subheadingText = t("banner.subheading");
+
   return (
-    <section className="relative w-full h-[300px] lg:h-[500px]  flex items-center justify-center overflow-hidden font-sans bg-stone-950">
+    <section className="relative w-full h-[300px] lg:h-[500px] flex items-center justify-center overflow-hidden font-sans bg-stone-950">
       {/* Background Image - Clean, bright, and clearly highlighted */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -36,7 +34,7 @@ const BannerOne: React.FC<BannerOneProps> = ({
       </div>
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent sm:from-black/70 sm:via-black/35 sm:to-transparent" />{" "}
       {/* Background Arabic 'و' Watermark - Elegant branding element in lower-right */}
-      <div className="absolute right-[-5%] bottom-[-5%] sm:right-[2%] sm:bottom-[2%] select-none pointer-events-none opacity-10 sm:opacity-25 transform translate-y-4 sm:translate-y-0 z-0">
+      <div className="absolute end-[-5%] bottom-[-5%] sm:end-[2%] sm:bottom-[2%] select-none pointer-events-none opacity-10 sm:opacity-25 transform translate-y-4 sm:translate-y-0 z-0">
         <span
           className="text-[180px] sm:text-[400px] font-serif leading-none text-[#8BA196] filter drop-shadow-[0_0_40px_rgba(74,89,82,0.2)]"
           style={{ fontFamily: "'Times New Roman', serif" }}
@@ -45,14 +43,16 @@ const BannerOne: React.FC<BannerOneProps> = ({
         </span>
       </div>
       {/* Main Content Container (Mobile-first layout) */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto md:px-5 md:py-10  flex flex-col justify-between ">
+      <div className="relative z-10 w-full max-w-7xl mx-auto md:px-5 md:py-10 flex flex-col justify-between ">
         {/* Hero Text Copy Area */}
         <div className="max-w-2xl mt-4 sm:mt-0">
-          <h1 className="text-3xl sm:text-6xl font-bold tracking-tight text-white leading-[1.15]  sm:mb-6 drop-shadow-[0_2px_15px_rgba(0,0,0,0.5)] font-serif">
-            {heading.split(" ").map((word, index) => {
+          <h1 className="text-3xl sm:text-6xl font-bold tracking-tight text-white leading-[1.15] sm:mb-6 drop-shadow-[0_2px_15px_rgba(0,0,0,0.5)] font-serif">
+            {headingText.split(" ").map((word, index) => {
               const isHighlight =
                 word.toLowerCase().includes("quality") ||
-                word.toLowerCase().includes("quantity!");
+                word.toLowerCase().includes("quantity!") ||
+                word.includes("الجودة") ||
+                word.includes("الكمية!");
               return (
                 <span
                   key={index}
@@ -68,8 +68,8 @@ const BannerOne: React.FC<BannerOneProps> = ({
             })}
           </h1>
 
-          <p className="text-sm sm:text-lg text-stone-200 font-light leading-relaxed  sm:mb-8 max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
-            {subheading}
+          <p className="text-sm sm:text-lg text-stone-200 font-light leading-relaxed sm:mb-8 max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+            {subheadingText}
           </p>
         </div>
 
@@ -77,26 +77,26 @@ const BannerOne: React.FC<BannerOneProps> = ({
         <div className="hidden sm:grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 border-t border-white/10 pt-8">
           <div className="flex flex-col gap-1">
             <span className="text-[#8BA196] font-serif text-[11px] font-bold tracking-widest uppercase">
-              Origin
+              {t("banner.originLabel")}
             </span>
             <span className="text-white text-sm font-semibold tracking-wide">
-              100% Single Origin Arabica
+              {t("banner.originVal")}
             </span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-[#8BA196] font-serif text-[11px] font-bold tracking-widest uppercase">
-              Roast
+              {t("banner.roastLabel")}
             </span>
             <span className="text-white text-sm font-semibold tracking-wide">
-              Handcrafted Medium Roast
+              {t("banner.roastVal")}
             </span>
           </div>
           <div className="flex flex-col gap-1">
             <span className="text-[#8BA196] font-serif text-[11px] font-bold tracking-widest uppercase">
-              Experience
+              {t("banner.expLabel")}
             </span>
             <span className="text-white text-sm font-semibold tracking-wide">
-              Cozy Coffee Shop Atmosphere
+              {t("banner.expVal")}
             </span>
           </div>
         </div>
@@ -106,3 +106,4 @@ const BannerOne: React.FC<BannerOneProps> = ({
 };
 
 export default BannerOne;
+

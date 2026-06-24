@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Heart, Star, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getMenuReaction, incrementMenuReaction, decrementMenuReaction } from "../../utils/menuActions";
+import { useLanguage } from "../../utils/LanguageContext";
 export interface MenuItem {
   id: string;
   name: string;
@@ -27,6 +28,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
   const [reactions, setReactions] = useState<Record<string, number>>({});
   const [hasLoved, setHasLoved] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState<typeof item | null>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     async function fetchReaction() {
@@ -63,8 +65,9 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
         <Image
           src={item.image}
           alt={item.name}
+          loading="eager"
           fill
-          sizes="100vw"
+          sizes="(max-width: 768px) 50vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>
@@ -72,12 +75,13 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
       {/* Content */}
       <div className=" p-2 lg:p-4 flex flex-col flex-grow relative h-28 lg:h-[188px]">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-[13px] lg:text-lg font-bold text-primary font-[family-name:var(--font-dm-serif)]">{item.name}</h3>
-
+          <h3 className="text-[13px] lg:text-lg font-bold text-primary font-[family-name:var(--font-dm-serif)]">
+            {t(`menu.items.${item.id}.name`) || item.name}
+          </h3>
         </div>
 
         {/* <p className="text-[12px] lg:text-sm text-gray-500 mb-4 line-clamp-2 flex-grow">
-          {item.description}
+          {t(`menu.items.${item.id}.description`) || item.description}
         </p> */}
 
         {/* Footer (Rating) */}
@@ -87,7 +91,9 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
               <Star className=" w-3 h-3 lg:w-4 lg:h-4 fill-yellow-400 text-yellow-400" />
               <span className="text-xs lg:text-sm font-medium text-foreground">{item.rating.toFixed(1)}</span>
             </div>
-            <span className="text-xs lg:text-lg font-semibold text-primary shrink-0">{item.price}</span>
+            <span className="text-xs lg:text-lg font-semibold text-primary shrink-0">
+              {t(`menu.items.${item.id}.price`) || item.price}
+            </span>
           </div>
 
 
@@ -124,10 +130,10 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
             </button>
 
             {/* Dynamic Text */}
-            <p className="text-[9px] font-semibold lg:text-xs text-gray-600 break-words whitespace-normal">
+            <p className="text-[9px] font-semibold lg:text-xs text-gray-600 break-words whitespace-normal ms-2">
               {reactions[item.id] > 0
-                ? `${reactions[item.id]} loved it.`
-                : "Add to favorite"}
+                ? `${reactions[item.id]} ${t("menu.card.lovedIt")}`
+                : t("menu.card.addToFavorite")}
             </p>
 
           </div>
@@ -174,7 +180,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ item }) => {
               {/* Title */}
               <div className="p-5 sm:p-6 bg-white flex flex-col items-center justify-center text-center shrink-0">
                 <h3 className="font-[family-name:var(--font-dm-serif)] text-2xl sm:text-3xl font-bold text-primary">
-                  {selectedMenuItem.name}
+                  {t(`menu.items.${selectedMenuItem.id}.name`) || selectedMenuItem.name}
                 </h3>
               </div>
             </motion.div>
