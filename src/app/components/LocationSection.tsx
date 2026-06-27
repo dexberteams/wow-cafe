@@ -8,8 +8,11 @@ import {
   Navigation,
   ArrowUpRight,
 } from "lucide-react";
+import { useLanguage } from "../../utils/LanguageContext";
 
 const LocationSection = () => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="contact"
@@ -23,10 +26,10 @@ const LocationSection = () => {
         {/* Section Heading */}
         <div className=" text-center mb-4 sm:mb-20">
           <span className=" text-[10px] font-bold tracking-widest uppercase block mb-1 animate-fade-in">
-            Visit Our Space
+            {t("location.visitOurSpace")}
           </span>
           <h2 className="text-2xl md:text-4xl font-bold tracking-tight mb-4 animate-fade-in-delayed font-[family-name:var(--font-dm-serif)]">
-            Our Location
+            {t("location.ourLocation")}
           </h2>
         </div>
 
@@ -44,7 +47,7 @@ const LocationSection = () => {
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="WOW Cafe Location Map"
+              title={t("location.ourLocation")}
             />
           </div>
 
@@ -56,11 +59,11 @@ const LocationSection = () => {
                 <div className="inline-flex items-center gap-2  border border-primary px-3.5 py-1.5 rounded-full mb-4 font-[family-name:var(--font-dm-serif)]">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                    Main Branch
+                    {t("location.mainBranch")}
                   </span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-dm-serif)]">
-                  <span className="text-5xl align-middle">و</span> Cafe
+                  <span className="text-5xl align-middle">و</span> {t("common.cafeName")}
                 </h3>
               </div>
 
@@ -73,12 +76,10 @@ const LocationSection = () => {
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-gray-700 uppercase tracking-widest">
-                      Address
+                      {t("location.addressLabel")}
                     </h4>
                     <p className="text-xs sm:text-base text-gray-500 font-light leading-relaxed">
-                      King Abdulaziz Rd, Kharj 14389,
-                      <br />
-                      Saudi Arabia
+                      {t("location.addressVal")}
                     </p>
                   </div>
                 </div>
@@ -90,13 +91,13 @@ const LocationSection = () => {
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-gray-700 uppercase tracking-widest">
-                      Hours
+                      {t("location.hoursLabel")}
                     </h4>
                     <p className="text-xs sm:text-base text-gray-500 font-semibold tracking-wide">
-                      Open 24 hours
+                      {t("location.hoursVal")}
                     </p>
                     <p className="text-xs text-gray-500 mt-0.5 font-light">
-                      Always here to serve you
+                      {t("location.hoursSub")}
                     </p>
                   </div>
                 </div>
@@ -109,10 +110,10 @@ const LocationSection = () => {
                 href="https://www.google.com/maps/place/WOW+CAFE+%7C+%D9%88%D8%A7%D9%88+%D9%83%D8%A7%D9%81%D9%8A%D8%A9/@24.3142115,47.1649929,17z/data=!3m1!4b1!4m6!3m5!1s0x3e2ff515c42d7f9f:0xccc40062171d0d6!8m2!3d24.3142115!4d47.1649929!16s%2Fg%2F11w2_3mrg0?entry=ttu"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-2 bg-[#4A5952] hover:bg-[#5b6e65] text-white py-2 px-3 lg:py-3.5 lg:px-5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_15px_rgba(74,89,82,0.3)] hover:shadow-[0_6px_20px_rgba(74,89,82,0.4)]"
+                className="group flex items-center justify-center gap-2 bg-[#4A5952] hover:bg-[#5b6e65] text-white py-2 px-3 lg:py-3.5 lg:px-5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_15px_rgba(74,89,82,0.3)] hover:shadow-[0_6px_20px_rgba(74,89,82,0.4)] cursor-pointer"
               >
                 <Navigation className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                <span>Get Directions</span>
+                <span>{t("location.getDirections")}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
               </a>
 
@@ -120,10 +121,10 @@ const LocationSection = () => {
                 href="https://wa.me/qr/FFKEFHGBUVRZI1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 border border-stone-700 hover:border-[#8BA196] bg-stone-850 hover:bg-[#4A5952]/10 text-primary py-2 px-3 lg:py-3.5 lg:px-5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+                className="flex items-center justify-center gap-2 border border-stone-700 hover:border-[#8BA196] bg-stone-850 hover:bg-[#4A5952]/10 text-primary py-2 px-3 lg:py-3.5 lg:px-5 rounded-lg text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4 text-primary" />
-                <span>WhatsApp Us</span>
+                <span>{t("location.whatsappUs")}</span>
               </a>
             </div>
           </div>

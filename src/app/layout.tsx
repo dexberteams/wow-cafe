@@ -1,7 +1,8 @@
-import { Geist, Geist_Mono, DM_Serif_Display, Nunito } from "next/font/google";
+import { Geist, Geist_Mono, DM_Serif_Display, Nunito, Cairo } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { LanguageProvider } from "../utils/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,9 +18,14 @@ const dmSerif = DM_Serif_Display({
   weight: "400",
   variable: "--font-dm-serif",
 });
- const nunito = Nunito({
+const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-nunito",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+const cairo = Cairo({
+  subsets: ["arabic"],
+  variable: "--font-cairo",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -32,14 +38,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} ${nunito.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dmSerif.variable} ${nunito.variable} ${cairo.variable} antialiased`}
       >
-        {/* nav */}
-        <Navbar></Navbar>
-        <main>{children}</main>
-        {/* footer */}
-        <Footer></Footer>
+        <LanguageProvider>
+          {/* nav */}
+          <Navbar></Navbar>
+          <main>{children}</main>
+          {/* footer */}
+          <Footer></Footer>
+        </LanguageProvider>
       </body>
     </html>
   );
 }
+

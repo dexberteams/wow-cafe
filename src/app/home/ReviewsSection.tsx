@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { uploadImage } from "../../utils/utils";
 import { createReview, getReviews } from "../../utils/reviewActions";
+import { useLanguage } from "../../utils/LanguageContext";
 
 interface Review {
   id: string;
@@ -64,6 +65,7 @@ export default function ReviewsSection() {
   const [dragOver, setDragOver] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     async function fetchReviews() {
@@ -196,20 +198,20 @@ export default function ReviewsSection() {
   };
 
   return (
-    <section className="bg-soft-bg pt-6 pb-16 lg:pt-10 lg:pb-20">
+    <section id="reviews" className="bg-soft-bg pt-6 pb-16 lg:pt-10 lg:pb-20">
       {/* Section Header */}
       <div className="text-center mb-5 lg:mb-10">
         <h1
           className="text-2xl md:text-4xl font-bold text-primary mb-2"
           style={{ fontFamily: "var(--font-dm-serif)" }}
         >
-          Customer Reviews
+          {t("reviews.title")}
         </h1>
         <p
           className="text-[12px] lg:text-[14px] text-gray-500 max-w-xl mx-auto"
           style={{ fontFamily: "var(--font-nunito)" }}
         >
-          Share your experience and see what others are saying!
+          {t("reviews.sub")}
         </p>
       </div>
       <div className="w-full flex flex-col lg:flex-row gap-4 lg:gap-8 p-4">
@@ -224,13 +226,13 @@ export default function ReviewsSection() {
                 className="text-[16px] md:text-2xl font-bold text-primary mb-1"
                 style={{ fontFamily: "var(--font-dm-serif)" }}
               >
-                Leave a Review
+                {t("reviews.leaveReview")}
               </h2>
               <p
                 className="text-xs text-gray-400 mb-2 lg:mb-8"
                 style={{ fontFamily: "var(--font-nunito)" }}
               >
-                Fill in your name and upload a photo from your visit.
+                {t("reviews.leaveReviewSub")}
               </p>
 
               <form
@@ -245,10 +247,10 @@ export default function ReviewsSection() {
                     className="block text-sm font-semibold text-gray-600 mb-1 lg:mb-2"
                     style={{ fontFamily: "var(--font-nunito)" }}
                   >
-                    Your Name
+                    {t("reviews.yourName")}
                   </label>
                   <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
+                    <User className="absolute start-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                     <input
                       id="reviewer-name"
                       type="text"
@@ -258,8 +260,8 @@ export default function ReviewsSection() {
                         setName(e.target.value);
                         setNameError(false);
                       }}
-                      placeholder="e.g. Sara Mohammed"
-                      className={`w-full pl-12 pr-4 py-4 rounded-lg border-2 outline-none text-gray-700 text-sm transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_rgba(74,89,82,0.1)] ${nameError
+                      placeholder={language === "en" ? "e.g. Sara Mohammed" : "مثال: سارة محمد"}
+                      className={`w-full ps-12 pe-4 py-4 rounded-lg border-2 outline-none text-gray-700 text-sm transition-all duration-300 focus:border-primary focus:shadow-[0_0_0_4px_rgba(74,89,82,0.1)] ${nameError
                         ? "border-red-400 bg-red-50"
                         : "border-gray-200 bg-gray-50"
                         }`}
@@ -271,7 +273,7 @@ export default function ReviewsSection() {
                       className="text-red-500 text-xs mt-1"
                       style={{ fontFamily: "var(--font-nunito)" }}
                     >
-                      Please enter your name.
+                      {t("reviews.errPleaseName")}
                     </p>
                   )}
                 </div>
@@ -282,7 +284,7 @@ export default function ReviewsSection() {
                     className="block text-sm font-semibold text-gray-600 mb-2"
                     style={{ fontFamily: "var(--font-nunito)" }}
                   >
-                    Upload Your Photo
+                    {t("reviews.uploadYourPhoto")}
                   </label>
 
                   <div
@@ -315,7 +317,7 @@ export default function ReviewsSection() {
                             className="text-white text-sm font-semibold"
                             style={{ fontFamily: "var(--font-nunito)" }}
                           >
-                            Click to change
+                            {t("gallery.clickToChange")}
                           </p>
                         </div>
                       </div>
@@ -329,13 +331,13 @@ export default function ReviewsSection() {
                             className="text-sm font-semibold text-primary"
                             style={{ fontFamily: "var(--font-nunito)" }}
                           >
-                            Click to upload or drag & drop
+                            {t("gallery.dragDrop")}
                           </p>
                           <p
                             className="text-xs text-gray-400 mt-1"
                             style={{ fontFamily: "var(--font-nunito)" }}
                           >
-                            PNG, JPG, WEBP up to 10MB
+                            {t("gallery.formatsLimit")}
                           </p>
                         </div>
                       </div>
@@ -355,7 +357,7 @@ export default function ReviewsSection() {
                       className="text-red-500 text-xs mt-1"
                       style={{ fontFamily: "var(--font-nunito)" }}
                     >
-                      Please upload a photo.
+                      {t("reviews.errPleasePhoto")}
                     </p>
                   )}
                 </div>
@@ -363,7 +365,7 @@ export default function ReviewsSection() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full py-2 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95 relative overflow-hidden"
+                  className="w-full py-2 lg:py-4 rounded-lg bg-primary text-white font-bold text-sm tracking-wide transition-all duration-300 hover:brightness-110 hover:shadow-[0_8px_30px_rgba(74,89,82,0.4)] active:scale-95 relative overflow-hidden cursor-pointer"
                   style={{ fontFamily: "var(--font-nunito)" }}
                 >
                   {submitted ? (
@@ -381,10 +383,10 @@ export default function ReviewsSection() {
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      Review Submitted!
+                      {t("reviews.reviewSubmitted")}
                     </span>
                   ) : (
-                    "Submit Review"
+                    t("reviews.submitReview")
                   )}
                 </button>
               </form>
@@ -399,20 +401,20 @@ export default function ReviewsSection() {
               className="text-xl md:text-2xl font-bold text-primary mb-6"
               style={{ fontFamily: "var(--font-dm-serif)" }}
             >
-              What Our Customers Say
+              {t("reviews.whatCustomersSay")}
             </h2>
             <div className="flex gap-2">
               <button
                 onClick={() => scrollCarousel("left")}
                 aria-label="Scroll left"
-                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300"
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={() => scrollCarousel("right")}
                 aria-label="Scroll right"
-                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300"
+                className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white border border-primary/20 flex items-center justify-center text-primary shadow hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -423,7 +425,7 @@ export default function ReviewsSection() {
             <div className="flex flex-col items-center justify-center py-5 lg:py-20 text-gray-400">
               <ImageIcon className="w-14 h-14 mb-4 opacity-30" />
               <p style={{ fontFamily: "var(--font-nunito)" }}>
-                No reviews yet. Be the first!
+                {t("reviews.noReviews")}
               </p>
             </div>
           ) : (
@@ -481,7 +483,7 @@ export default function ReviewsSection() {
                         className="font-bold text-sm text-primary truncate"
                         style={{ fontFamily: "var(--font-nunito)" }}
                       >
-                        {review.name}
+                        {review.id.startsWith("demo") ? t(`reviews.demoReviewers.${review.id}`) : review.name}
                       </p>
                       {/* <div className="flex gap-0.5 mt-0.5">
                         {[...Array(5)].map((_, i) => (
