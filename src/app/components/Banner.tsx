@@ -24,7 +24,7 @@ const BannerOne: React.FC<BannerOneProps> = () => {
       {/* Background Image - Contains white background and product image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/banner/wow-banner1_cleanup.jpg"
+          src="/assets/banner/banner-final.jpg"
           alt="WOW Cafe Banner"
           fill
           priority
