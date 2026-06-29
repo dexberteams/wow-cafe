@@ -10,7 +10,7 @@ export const translations = {
       languageCode: "AR",
     },
     banner: {
-      heading: "Choose quality over quantity!",
+      heading: "Choose quality",
       subheading: "Experience handcrafted coffee and unforgettable moments at WOW Cafe.",
       originLabel: "Origin",
       originVal: "100% Single Origin Arabica",
